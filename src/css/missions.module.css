@@ -1,0 +1,27 @@
+
+/* Styling for the overall container */
+.App {
+  position: relative;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: hidden; /* Hide any overflowing content */
+}
+
+/* Styling for the background image */
+.App img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make the image cover the full width */
+  height: 100%; /* Make the image cover the full height */
+  object-fit: cover; /* Ensures the image scales without distortion */
+  z-index: -1; /* Place the image behind other content */
+}
+
+/* Additional styling for content */
+.App > *:not(img) {
+  position: relative;
+  z-index: 1; /* Place content above the image */
+  color: #ffffff; /* White text for contrast */
+  font-family: 'Khand', sans-serif; /* Space-themed font */
+}
