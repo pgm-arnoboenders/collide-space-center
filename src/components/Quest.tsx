@@ -1,22 +1,6 @@
 import { useState, useEffect } from "react";
-
-interface Problem {
-  name: string;
-  description: string;
-  mission: {
-    difficulty: number;
-    effect: string;
-    id: string;
-    name: string;
-    objective: string;
-    parameters: string;
-    remainingAttempts: string;
-    solved: boolean;
-    type: string;
-  }[];
-  score: number;
-  solved: boolean;
-}
+import { Link } from "react-router-dom";
+import { Problem } from "../types/problem";
 
 export default function Quest() {
   const [problems, setProblems] = useState([] as Problem[]);
@@ -32,7 +16,6 @@ export default function Quest() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-  console.log(problems);
 
   return (
     <div className="App">
@@ -40,14 +23,14 @@ export default function Quest() {
       <h2>Problems:</h2>
 
       {problems.map((problem, index) => (
-        <div>
-          <h3 key={`problem${index}`}>{problem.name}</h3>
+        <div key={`problem${index}`}>
+          <h3>{problem.name}</h3>
           <p>{problem.description}</p>
           <p>{problem.score}</p>
-          <p>{problem.solved}</p>
-          {problem.mission.map((mission) => (
+          <p>{problem.solved ? "Solved" : "Not Solved"}</p>
+          {problem.mission.map((mission: { id: string; name: string }) => (
             <li key={mission.id}>
-              <a href={`missions/:${mission.id}`}>{mission.name}</a>
+              <Link to={`/missions/${mission.id}`}>{mission.name}</Link>
             </li>
           ))}
         </div>
