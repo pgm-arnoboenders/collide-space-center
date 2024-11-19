@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Missions from "./pages/Missions";
 import Home from "./pages/Home";
+import Mission from "./pages/Mission";
 
 import "./App.css";
 
@@ -14,10 +15,9 @@ export default function App() {
         rel="stylesheet"
       ></link>
       <Routes>
-        <Route>
-          <Route index element={<Home />} />
-          <Route path="/missions" element={<Missions />} />
-        </Route>
+        <Route path="/" element={<Home />} />
+        <Route path="missions/:id" element={<Mission />} />
+        <Route path="/missions" element={<Missions />} />
       </Routes>
     </BrowserRouter>
   );

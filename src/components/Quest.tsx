@@ -1,23 +1,7 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Problem } from "../types/problem";
 import styles from "../css/quests.module.css";
-
-interface Problem {
-  name: string;
-  description: string;
-  mission: {
-    difficulty: number;
-    effect: string;
-    id: string;
-    name: string;
-    objective: string;
-    parameters: string;
-    remainingAttempts: string;
-    solved: boolean;
-    type: string;
-  }[];
-  score: number;
-  solved: boolean;
-}
 
 export default function Quest() {
   const [problems, setProblems] = useState([] as Problem[]);
