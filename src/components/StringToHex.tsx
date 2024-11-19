@@ -3,7 +3,7 @@ export default function StringToHex() {
     return d.toString(16);
   }
   function stringToHex(tmp: string) {
-    var str = "",
+    let str = "",
       i = 0,
       tmp_len = tmp.length,
       c;

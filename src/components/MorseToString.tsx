@@ -1,6 +1,6 @@
 export default function MorseToString() {
   function decodeMorse(morseCode: string) {
-    var ref: { [key: string]: string } = {
+    const ref: { [key: string]: string } = {
       ".-": "a",
       "-...": "b",
       "-.-.": "c",
@@ -50,7 +50,7 @@ export default function MorseToString() {
       .join(" ");
   }
 
-  var decoded = decodeMorse("--.. -.. ... -- --.- --- --.. .-. .--. --- ---");
+  const decoded = decodeMorse("--.. -.. ... -- --.- --- --.. .-. .--. --- ---");
   return (
     <div>
       <h3>Morse to String</h3>
