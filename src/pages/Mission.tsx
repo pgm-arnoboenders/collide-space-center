@@ -5,7 +5,8 @@ import type { Mission } from "../types/mission";
 
 export default function Mission() {
   const { id, category } = useParams();
-  const correctCategory = category?.replace(":", " ");
+  const correctCategory = category?.replace(":", "");
+  const correctId = id?.replace(":", "");
   const [problems, setProblems] = useState([] as Problem[]);
   const [mission, setMission] = useState<Mission | undefined>(undefined);
 
@@ -13,18 +14,22 @@ export default function Mission() {
     fetch("https://htf.collide.be/quest/f7a431de-dd78-4c76-beec-c8c21c2c13e7")
       .then((response) => response.json())
       .then((data) => {
+        // Filter problems based on the category (problem.name)
         const filteredProblems = data.problems.filter(
           (problem: Problem) => problem.name === correctCategory
         );
-        setProblems(filteredProblems);
 
-        const foundMission = data.missions.find(
-          (mission: Mission) => mission.id === id
-        );
+        // Find the specific mission by its id in the filtered problems
+        const foundMission = filteredProblems
+          .flatMap((problem: Problem) => problem.mission)
+          .find((mission: Mission) => mission.id === correctId);
+
+        // Update state
+        setProblems(filteredProblems);
         setMission(foundMission);
       });
   }, [id, correctCategory]);
-
+console.log(mission);
   if (!id) {
     return <div>Error: No mission ID provided</div>;
   }
