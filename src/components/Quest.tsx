@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Problem } from "../types/problem";
+import styles from "../css/quests.module.css";
 
 export default function Quest() {
   const [problems, setProblems] = useState([] as Problem[]);
@@ -14,27 +15,33 @@ export default function Quest() {
   }, []);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className={styles.error}>Error: {error.message}</div>;
   }
 
   return (
-    <div className="App">
-      <h1>Quest</h1>
-      <h2>Problems:</h2>
-
-      {problems.map((problem, index) => (
-        <div key={`problem${index}`}>
-          <h3>{problem.name}</h3>
-          <p>{problem.description}</p>
-          <p>{problem.score}</p>
-          <p>{problem.solved ? "Solved" : "Not Solved"}</p>
-          {problem.mission.map((mission: { id: string; name: string }) => (
-            <li key={mission.id}>
-              <Link to={`/missions/${mission.id}`}>{mission.name}</Link>
-            </li>
-          ))}
-        </div>
-      ))}
+    <div className={styles.container}>
+      <h1 className={styles.title}>Quest</h1>
+      <h2 className={styles.subtitle}>Problems:</h2>
+      <div className={styles.problemList}>
+        {problems.map((problem, index) => (
+          <div key={`problem${index}`} className={styles.problemCard}>
+            <h3 className={styles.problemTitle}>{problem.name}</h3>
+            <p className={styles.description}>{problem.description}</p>
+            <p className={styles.solved}>
+              Solved: {problem.solved ? "Yes" : "No"}
+            </p>
+            <ul className={styles.missionList}>
+              {problem.mission.map((mission) => (
+                <li key={mission.id} className={styles.missionItem}>
+                  <a href={`missions/:${mission.id}`} className={styles.missionLink}>
+                    {mission.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

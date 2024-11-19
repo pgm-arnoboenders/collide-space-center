@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Problem } from "../types/problem";
 import type { Mission } from "../types/mission";
 
+
 export default function Mission() {
   const params = useParams();
   console.log(params);
