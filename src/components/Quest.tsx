@@ -17,7 +17,7 @@ export default function Quest() {
   if (error) {
     return <div className={styles.error}>Error: {error.message}</div>;
   }
-
+  console.log(problems);
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Quest</h1>
@@ -33,7 +33,10 @@ export default function Quest() {
             <ul className={styles.missionList}>
               {problem.mission.map((mission) => (
                 <li key={mission.id} className={styles.missionItem}>
-                  <a href={`missions/:${mission.id}`} className={styles.missionLink}>
+                  <a
+                    href={`missions/:${problem.name}/:${mission.id}`}
+                    className={styles.missionLink}
+                  >
                     {mission.name}
                   </a>
                 </li>
